@@ -25,5 +25,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/api", apiRoutes);
+app.get("/", (req, res) => {
+  res.send("Hello go to the /api endpoing");
+});
 
 export default db;
