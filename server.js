@@ -19,8 +19,9 @@ db.connect((err) => {
   }
 });
 const app = express();
+const PORT = 5000;
 
-app.listen();
+app.listen(PORT, () => console.log("Server is running"));
 app.use(bodyParser.json());
 app.use(cors());
 
