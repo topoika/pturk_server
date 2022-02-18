@@ -5,22 +5,21 @@ import apiRoutes from "./routes/routes.js";
 import cors from "cors";
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "pturk",
+  host: "server270.web-hosting.com",
+  user: "myvaudzq_testuser",
+  password: "vY7g8fKP!UHy",
+  database: "myvaudzq_test1",
 });
 
 db.connect((err) => {
   if (err) {
-    console.log(err.message);
+    console.log(err);
   } else {
     console.log("Succesful connection");
   }
 });
 const app = express();
-const PORT = 5000;
-
+const PORT = 3001;
 app.listen(PORT, () => console.log("Server is running"));
 app.use(bodyParser.json());
 app.use(cors());
