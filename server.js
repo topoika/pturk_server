@@ -5,10 +5,10 @@ import apiRoutes from "./routes/routes.js";
 import cors from "cors";
 
 const db = mysql.createConnection({
-  host: "server270.web-hosting.com",
-  user: "myvaudzq_testuser",
-  password: "vY7g8fKP!UHy",
-  database: "myvaudzq_test1",
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "pturk",
 });
 
 db.connect((err) => {

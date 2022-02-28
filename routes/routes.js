@@ -12,6 +12,8 @@ import {
   loginUser,
   createCountry,
   registerUser,
+  updateUser,
+  getRandomBackgroundImage,
 } from "../controllers/user-controller.js";
 const router = express.Router();
 
@@ -31,7 +33,11 @@ router.get("/listings", getAllListings);
 //User Managment Routes
 router.post("/login", loginUser);
 router.post("/register", registerUser);
+router.post("/updateuser", updateUser);
 router.post("/create", createCountry);
+
+//Background Image Routes
+router.get("/background", getRandomBackgroundImage);
 
 //Midleware
 

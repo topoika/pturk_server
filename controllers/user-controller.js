@@ -34,7 +34,6 @@ export const loginUser = async (req, res) => {
     let hashedPassword = results[0].password;
     let pswd = user.password;
     bcrypt.compare(pswd, hashedPassword, (err, result) => {
-      console.log(result);
       if (result) {
         res.send({
           user: results,
@@ -43,6 +42,25 @@ export const loginUser = async (req, res) => {
       } else {
         res.sendStatus(401);
       }
+    });
+  });
+};
+
+export const updateUser = async (req, res) => {
+  let user = req.body;
+  let sql = `SELECT * FROM users WHERE email="${user.email}"`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    let _sql = `UPDATE users SET ? WHERE email="${user.email}"`;
+    db.query(_sql, user, (err, result) => {
+      if (err) throw err;
+      let _lastsql = `select * from users where email="${user.email}"`;
+      db.query(_lastsql, (err, _results) => {
+        res.send({
+          user: _results,
+          message: "User is updated succesfully",
+        });
+      });
     });
   });
 };
@@ -69,6 +87,14 @@ export const createCountry = (req, res) => {
     res.send({
       results,
     });
+  });
+};
+
+export const getRandomBackgroundImage = (req, res) => {
+  const sql = `SELECT * FROM top_background_img ORDER BY RAND() LIMIT 1`;
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send({ data: result, success: true });
   });
 };
 

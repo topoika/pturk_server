@@ -24,8 +24,12 @@ const router = express.Router();
 // };
 
 export const getAllListings = (req, res) => {
+  let sql = `SELECT  sub_categories.id,sub_categories.name,categories.id, categories.name FROM sub_categories FULL OUTER JOIN categories ON sub_categories.parent_category=categories.id`; //sub_categories.parent_category`;
   try {
-    res.send({ message: "Everything is okay", data: [] });
+    db.query(sql, (err, results) => {
+      if (err) throw err;
+      res.send({ message: "Everything is okay", data: results });
+    });
   } catch (error) {
     throw error;
   }
