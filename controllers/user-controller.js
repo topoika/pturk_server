@@ -97,5 +97,13 @@ export const getRandomBackgroundImage = (req, res) => {
     res.send({ data: result, success: true });
   });
 };
+export const addBackgroundImage = (req, res) => {
+  let image = req.body;
+  const sql = `INSERT INTO top_background_img SET ?`;
+  db.query(sql, image, (err, result) => {
+    if (err) throw err;
+    res.send({ data: result, success: true });
+  });
+};
 
 export default router;

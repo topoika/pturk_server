@@ -14,6 +14,7 @@ import {
   registerUser,
   updateUser,
   getRandomBackgroundImage,
+  addBackgroundImage,
 } from "../controllers/user-controller.js";
 const router = express.Router();
 
@@ -38,6 +39,7 @@ router.post("/create", createCountry);
 
 //Background Image Routes
 router.get("/background", getRandomBackgroundImage);
+router.post("/add-background", addBackgroundImage);
 
 //Midleware
 
