@@ -45,6 +45,17 @@ export const loginUser = async (req, res) => {
     });
   });
 };
+export const getUserInfo = async (req, res) => {
+  const api_token = req.headers["token"];
+  let sql = `SELECT * FROM users WHERE api_token=${api_token}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send({
+      user: results,
+      message: "User is retrived succesfully",
+    });
+  });
+};
 
 export const updateUser = async (req, res) => {
   let user = req.body;

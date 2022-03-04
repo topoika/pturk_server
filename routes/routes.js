@@ -15,6 +15,7 @@ import {
   updateUser,
   getRandomBackgroundImage,
   addBackgroundImage,
+  getUserInfo,
 } from "../controllers/user-controller.js";
 const router = express.Router();
 
@@ -35,6 +36,8 @@ router.get("/listings", getAllListings);
 router.post("/login", loginUser);
 router.post("/register", registerUser);
 router.post("/updateuser", updateUser);
+router.get("/getuserinfo", getUserInfo);
+
 router.post("/create", createCountry);
 
 //Background Image Routes
