@@ -10,17 +10,26 @@ const db = mysql.createConnection({
   password: "",
   database: "pturk",
 });
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "plumbingturkey_test1",
+//   password: "vY7g8fKP!UHy",
+//   port: 3306,
+//   database: "plumbingturkey_test",
+// });
 
-db.connect((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Succesful connection");
-  }
-});
 const app = express();
 const PORT = 3001;
-app.listen(PORT, () => console.log("Server is running"));
+app.listen(PORT, () => {
+  console.log("Server is running");
+  db.connect((err) => {
+    if (err) {
+      console.log("Error is " + err.message);
+    } else {
+      console.log("Succesful connection");
+    }
+  });
+});
 app.use(bodyParser.json());
 app.use(cors());
 

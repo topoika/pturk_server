@@ -76,30 +76,30 @@ export const updateUser = async (req, res) => {
   });
 };
 
-export const createCountry = (req, res) => {
-  let sql = `CREATE TABLE countries (
-    id int  NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name char(128)  NOT NULL,
-    iso3 char(4) NOT NULL,
-    code char(4) NOT NULL,
-    region char(50)  NOT NULL,
-    subregion char(100), 
-    capital char(100),
-    phonecode char(5),
-    country_code char(8)  NOT NULL,
-    latitude decimal(9,6)  NOT NULL,
-    longitude decimal(9,6)  NOT NULL,
-    created_at Date NOT NULL,
-    updated_at Date NOT NULL,
-    wikiDataId char(30)
-)`;
-  db.query(sql, (err, results) => {
-    if (err) throw err;
-    res.send({
-      results,
-    });
-  });
-};
+// export const createCountry = (req, res) => {
+//   let sql = `CREATE TABLE countries (
+//     id int  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+//     name char(128)  NOT NULL,
+//     iso3 char(4) NOT NULL,
+//     code char(4) NOT NULL,
+//     region char(50)  NOT NULL,
+//     subregion char(100),
+//     capital char(100),
+//     phonecode char(5),
+//     country_code char(8)  NOT NULL,
+//     latitude decimal(9,6)  NOT NULL,
+//     longitude decimal(9,6)  NOT NULL,
+//     created_at Date NOT NULL,
+//     updated_at Date NOT NULL,
+//     wikiDataId char(30)
+// )`;
+//   db.query(sql, (err, results) => {
+//     if (err) throw err;
+//     res.send({
+//       results,
+//     });
+//   });
+// };
 
 export const getRandomBackgroundImage = (req, res) => {
   const sql = `SELECT * FROM top_background_img ORDER BY RAND() LIMIT 1`;

@@ -1,5 +1,8 @@
 import express from "express";
-import { getAllListings } from "./../controllers/listing-controller.js";
+import {
+  createListing,
+  getAllListings,
+} from "./../controllers/listing-controller.js";
 import {
   getAllCategories,
   addCategory,
@@ -10,13 +13,18 @@ import {
 } from "./../controllers/category-controller.js";
 import {
   loginUser,
-  createCountry,
   registerUser,
   updateUser,
   getRandomBackgroundImage,
   addBackgroundImage,
   getUserInfo,
 } from "../controllers/user-controller.js";
+import {
+  createCountry,
+  createState,
+  getCountries,
+  getStates,
+} from "../controllers/location-controllers.js";
 const router = express.Router();
 
 //Categories Routes
@@ -30,7 +38,8 @@ router.get("/randomsubcategories", getRandomSubCategories);
 router.post("/subcategory", addSubCategory);
 
 //Listings Routes
-router.get("/listings", getAllListings);
+router.get("/listings/:id", getAllListings);
+router.post("/listing", createListing);
 
 //User Managment Routes
 router.post("/login", loginUser);
@@ -38,7 +47,11 @@ router.post("/register", registerUser);
 router.post("/updateuser", updateUser);
 router.get("/getuserinfo", getUserInfo);
 
-router.post("/create", createCountry);
+//Location Routes Management
+router.post("/country", createCountry);
+router.get("/countries", getCountries);
+router.post("/state", createState);
+router.get("/states/:id", getStates);
 
 //Background Image Routes
 router.get("/background", getRandomBackgroundImage);

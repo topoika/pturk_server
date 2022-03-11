@@ -3,9 +3,6 @@ import db from "./../server.js";
 const router = express.Router();
 
 // export const getAllListings = (req, res) => {
-//   let arr = [];
-//   let sql =
-//     "SELECT `id`, `name`, `date_created`, `date_updated`, `country_id` FROM `new_listing`";
 
 //   db.query(sql, (err, result) => {
 //     if (err) throw err;
@@ -22,13 +19,35 @@ const router = express.Router();
 //     });
 //   });
 // };
-
+export const createListing = (req, res) => {
+  let sql = "INSERT INTO listings SET ?";
+  const listing = req.body;
+  db.query(sql, listing, (err, resuts) => {
+    if (err) throw err;
+    let _countrySql = `select * from listings where id=${resuts.insertId}`;
+    db.query(_countrySql, (err, result) => {
+      if (err) throw err;
+      res.send({
+        data: result,
+        message: "Listing is created succesfully",
+      });
+    });
+  });
+};
 export const getAllListings = (req, res) => {
-  let sql = `SELECT  sub_categories.id,sub_categories.name,categories.id, categories.name FROM sub_categories FULL OUTER JOIN categories ON sub_categories.parent_category=categories.id`; //sub_categories.parent_category`;
+  let id = req.params.id;
+  let sql = `SELECT * FROM listings WHERE category_id=${id} AND sponsored=0`;
   try {
     db.query(sql, (err, results) => {
       if (err) throw err;
-      res.send({ message: "Everything is okay", data: results });
+      let sponsoredSql = `SELECT * FROM listings WHERE category_id=${id} AND sponsored=1`;
+      db.query(sponsoredSql, (err, sponsored) => {
+        res.send({
+          data: results,
+          sponsored: sponsored,
+          message: "Listings are retrived succesfully",
+        });
+      });
     });
   } catch (error) {
     throw error;
