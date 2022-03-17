@@ -2,9 +2,11 @@ import express from "express";
 import {
   createFaq,
   createListing,
+  createOpationHour,
   getAllListings,
   getFaqs,
   getListing,
+  getOpationHours,
 } from "./../controllers/listing-controller.js";
 import {
   getAllCategories,
@@ -51,6 +53,9 @@ router.post("/listing", createListing);
 router.get("/listing/:id", getListing);
 router.get("/listingfaqs/:id", getFaqs);
 router.post("/listingfaq", createFaq);
+router.get("/listing/:id", getListing);
+router.get("/operatinghours/:id", getOpationHours);
+router.post("/operatinghour", createOpationHour);
 
 //Reviews Management Routes
 router.get("/reviews/:id", getReviews);
@@ -74,7 +79,6 @@ router.get("/background", getRandomBackgroundImage);
 router.post("/add-background", addBackgroundImage);
 
 //Midleware
-
 function varifyUserToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== "undefined") {

@@ -81,6 +81,7 @@ export const createFaq = (req, res) => {
     });
   });
 };
+
 export const getFaqs = (req, res) => {
   let id = req.params.id;
   let sql = `SELECT * FROM listing_faq WHERE listing_id=${id}`;
@@ -89,6 +90,32 @@ export const getFaqs = (req, res) => {
     res.send({
       data: results,
       message: "Listing faqs are retrived succesfully",
+    });
+  });
+};
+export const createOpationHour = (req, res) => {
+  let hour = req.body;
+  let sql = "INSERT INTO operating_hours SET ?";
+  db.query(sql, hour, (err, row) => {
+    if (err) throw err;
+    let hoursSql = `select * from operating_hours where id=${row.insertId}`;
+    db.query(hoursSql, (err, hours) => {
+      if (err) throw err;
+      res.send({
+        data: hours,
+        message: "Opation Hours is created succesfully",
+      });
+    });
+  });
+};
+export const getOpationHours = (req, res) => {
+  let id = req.params.id;
+  let sql = `SELECT * FROM operating_hours WHERE listing_id=${id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send({
+      data: results,
+      message: "Opation Hours are retrived succesfully",
     });
   });
 };
