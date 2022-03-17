@@ -1,7 +1,10 @@
 import express from "express";
 import {
+  createFaq,
   createListing,
   getAllListings,
+  getFaqs,
+  getListing,
 } from "./../controllers/listing-controller.js";
 import {
   getAllCategories,
@@ -25,6 +28,11 @@ import {
   getCountries,
   getStates,
 } from "../controllers/location-controllers.js";
+import {
+  createReply,
+  creatReview,
+  getReviews,
+} from "../controllers/reviews-controller.js";
 const router = express.Router();
 
 //Categories Routes
@@ -40,6 +48,14 @@ router.post("/subcategory", addSubCategory);
 //Listings Routes
 router.get("/listings/:id", getAllListings);
 router.post("/listing", createListing);
+router.get("/listing/:id", getListing);
+router.get("/listingfaqs/:id", getFaqs);
+router.post("/listingfaq", createFaq);
+
+//Reviews Management Routes
+router.get("/reviews/:id", getReviews);
+router.post("/review", creatReview);
+router.post("/reply", createReply);
 
 //User Managment Routes
 router.post("/login", loginUser);

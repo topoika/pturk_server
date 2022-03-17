@@ -42,6 +42,7 @@ export const getAllListings = (req, res) => {
       if (err) throw err;
       let sponsoredSql = `SELECT * FROM listings WHERE category_id=${id} AND sponsored=1`;
       db.query(sponsoredSql, (err, sponsored) => {
+        if (err) throw err;
         res.send({
           data: results,
           sponsored: sponsored,
@@ -52,6 +53,44 @@ export const getAllListings = (req, res) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const getListing = (req, res) => {
+  let id = req.params.id;
+  let sql = `SELECT * FROM listings WHERE id=${id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send({
+      data: results,
+      message: "Listing are retrived succesfully",
+    });
+  });
+};
+export const createFaq = (req, res) => {
+  let faq = req.body;
+  let sql = "INSERT INTO listing_faq SET ?";
+  db.query(sql, faq, (err, row) => {
+    if (err) throw err;
+    let faqSql = `select * from listing_faq where id=${row.insertId}`;
+    db.query(faqSql, (err, _faq) => {
+      if (err) throw err;
+      res.send({
+        data: _faq,
+        message: "Listing faq is created succesfully",
+      });
+    });
+  });
+};
+export const getFaqs = (req, res) => {
+  let id = req.params.id;
+  let sql = `SELECT * FROM listing_faq WHERE listing_id=${id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send({
+      data: results,
+      message: "Listing faqs are retrived succesfully",
+    });
+  });
 };
 
 export default router;
