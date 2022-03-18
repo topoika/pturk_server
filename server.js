@@ -27,10 +27,10 @@ const db = mysql.createPool({
 });
 
 const app = express();
-const PORT = process.env.LOCAL_PORT;
+const PORT = process.env.LOCAL_PORT | 3000;
 app.listen(PORT, () => {
   console.log("Server is running");
-  firstQuery();
+  // firstQuery();
   // db.connect((err) => {
   //   if (err) {
   //     console.log("Error is " + err.message);
@@ -55,6 +55,9 @@ app.use(cors());
 app.use("/api", apiRoutes);
 app.get("/", (req, res) => {
   res.send("Hello go to the /api endpoing");
+});
+app.get("/new", (req, res) => {
+  res.send("Hello go to the /api endpoing this is new today");
 });
 
 export default db;
