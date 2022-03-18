@@ -27,7 +27,7 @@ const db = mysql.createPool({
 });
 
 const app = express();
-const PORT = process.env.LOCAL_PORT | 3000;
+const PORT = process.env.LOCAL_PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server is running");
   // firstQuery();
