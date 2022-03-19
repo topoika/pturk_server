@@ -12,7 +12,7 @@ dotenv.config();
 //   password: process.env.LOCAL_PASSWORD,
 //   database: process.env.LOCAL_DATABASE,
 // });
-const db = mysql.createPool({
+const db = mysql.createConnection({
   host: process.env.SQL_HOST,
   user: process.env.SQL_USER,
   password: process.env.SQL_PASSWORD,
@@ -30,25 +30,15 @@ const app = express();
 const PORT = process.env.LOCAL_PORT | 3000;
 app.listen(PORT, () => {
   console.log("Server is running");
-  // firstQuery();
-  // db.connect((err) => {
-  //   if (err) {
-  //     console.log("Error is " + err.message);
-  //     firstQuery();
-  //   } else {
-  //     console.log("Succesful connection");
-  //     firstQuery();
-  //   }
-  // });
+  db.connect((err) => {
+    if (err) {
+      console.log("Error is " + err.message);
+    } else {
+      console.log("Succesful connection");
+    }
+  });
 });
 
-function firstQuery() {
-  let sql = "SELECT * FROM countries";
-  db.query(sql, (err, results) => {
-    if (err) console.log("Error here is :" + err.message);
-    console.log(results);
-  });
-}
 app.use(bodyParser.json());
 app.use(cors());
 
