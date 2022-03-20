@@ -2,10 +2,12 @@ import express from "express";
 import {
   createFaq,
   createListing,
+  createListingAttribute,
   createOpationHour,
   getAllListings,
   getFaqs,
   getListing,
+  getListingAttributes,
   getOpationHours,
 } from "./../controllers/listing-controller.js";
 import {
@@ -56,6 +58,9 @@ router.post("/listingfaq", createFaq);
 router.get("/listing/:id", getListing);
 router.get("/operatinghours/:id", getOpationHours);
 router.post("/operatinghour", createOpationHour);
+router.get("/listing/:id", getListing);
+router.get("/listingattributes/:id", getListingAttributes);
+router.post("/listingattribute", createListingAttribute);
 
 //Reviews Management Routes
 router.get("/reviews/:id", getReviews);

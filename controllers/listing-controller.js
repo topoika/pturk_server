@@ -119,5 +119,31 @@ export const getOpationHours = (req, res) => {
     });
   });
 };
+export const createListingAttribute = (req, res) => {
+  let attribute = req.body;
+  let sql = "INSERT INTO listing_attributes SET ?";
+  db.query(sql, attribute, (err, row) => {
+    if (err) throw err;
+    let attributesSql = `select * from listing_attributes where id=${row.insertId}`;
+    db.query(attributesSql, (err, attributes) => {
+      if (err) throw err;
+      res.send({
+        data: attributes,
+        message: "Listing Attribute is created succesfully",
+      });
+    });
+  });
+};
+export const getListingAttributes = (req, res) => {
+  let id = req.params.id;
+  let sql = `SELECT * FROM listing_attributes WHERE listing_id=${id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send({
+      data: results,
+      message: "Listing Attributes are retrived succesfully",
+    });
+  });
+};
 
 export default router;
