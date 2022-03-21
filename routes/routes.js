@@ -37,6 +37,10 @@ import {
   creatReview,
   getReviews,
 } from "../controllers/reviews-controller.js";
+import {
+  createActivity,
+  getActivity,
+} from "../controllers/activities-controller.js";
 const router = express.Router();
 
 //Categories Routes
@@ -82,6 +86,10 @@ router.get("/states/:id", getStates);
 //Background Image Routes
 router.get("/background", getRandomBackgroundImage);
 router.post("/add-background", addBackgroundImage);
+
+//Activities Management Routes
+router.get("/activies", getActivity);
+router.post("/activity", createActivity);
 
 //Midleware
 function varifyUserToken(req, res, next) {
