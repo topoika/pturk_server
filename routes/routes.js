@@ -35,6 +35,7 @@ import {
 import {
   createReply,
   creatReview,
+  getOneReview,
   getReviews,
 } from "../controllers/reviews-controller.js";
 import {
@@ -68,6 +69,7 @@ router.post("/listingattribute", createListingAttribute);
 
 //Reviews Management Routes
 router.get("/reviews/:id", getReviews);
+router.get("/review/:id", getOneReview);
 router.post("/review", creatReview);
 router.post("/reply", createReply);
 
