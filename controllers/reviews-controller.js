@@ -25,7 +25,6 @@ export const getReviews = (req, res) => {
             });
           }
         });
-        // completeReview.push(review);
       });
     });
   });

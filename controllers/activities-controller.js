@@ -32,4 +32,27 @@ export const createActivity = (req, res) => {
     });
   });
 };
+export const createALike = (req, res) => {
+  let id = req.params.id;
+  let sql = `UPDATE listings SET likes = likes +1 WHERE id = ${id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+
+    res.send({
+      data: results,
+      message: "Like update succesfully",
+    });
+  });
+};
+export const createADislike = (req, res) => {
+  let id = req.params.id;
+  let sql = `UPDATE listings SET likes = likes - 1 WHERE id = ${id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send({
+      data: results,
+      message: "Dislike update succesfully",
+    });
+  });
+};
 export default router;

@@ -40,12 +40,14 @@ import {
 } from "../controllers/reviews-controller.js";
 import {
   createActivity,
+  createADislike,
+  createALike,
   getActivity,
 } from "../controllers/activities-controller.js";
 const router = express.Router();
 
 //Categories Routes
-router.get("/categories", varifyUserToken, getAllCategories);
+router.get("/categories", getAllCategories);
 router.get("/featuredcategories", getFeaturedCategories);
 router.post("/category", addCategory);
 
@@ -91,10 +93,12 @@ router.post("/add-background", addBackgroundImage);
 
 //Activities Management Routes
 router.get("/activies", getActivity);
-router.post("/activity", createActivity);
+router.post("/activity", verifyUserToken, createActivity);
+router.post("/addlike/:id", verifyUserToken, createALike);
+router.post("/adddislike/:id", verifyUserToken, createADislike);
 
 //Midleware
-function varifyUserToken(req, res, next) {
+function verifyUserToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== "undefined") {
     const bearer = bearerHeader.split(" ");
